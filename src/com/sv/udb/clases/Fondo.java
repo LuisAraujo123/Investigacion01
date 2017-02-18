@@ -17,8 +17,8 @@ public class Fondo extends javax.swing.JPanel {
 
     private String path;
     
-public Fondo(String direccion) {
-this.setSize(250, 318); //se selecciona el tamaño del panel
+public Fondo(String direccion, int width, int height) {
+this.setSize(width, height); //se selecciona el tamaño del panel
 this.path = direccion;
 }
 

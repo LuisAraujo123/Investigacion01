@@ -5,7 +5,15 @@
  */
 package com.sv.udb.forms;
 
+import com.sv.udb.clases.Fondo;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 /**
@@ -24,7 +32,11 @@ public class frmReloj extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         calendario = new java.util.GregorianCalendar();
-        segundos = calendario.get(Calendar.SECOND);
+        this.generar(220, 32, pnlFondo, "R");
+        inicial();
+        Fondo img1 = new Fondo("com/sv/udb/images/reloj.jpg", 434, 425);
+        pnlFondo.add(img1);
+        pnlFondo.repaint();
         timer = new javax.swing.Timer(1000, new java.awt.event.ActionListener() {
             @ Override
             public void actionPerformed(java.awt.event.ActionEvent ae) {
@@ -36,13 +48,80 @@ public class frmReloj extends javax.swing.JFrame {
                 hora = calendario.get(Calendar.HOUR_OF_DAY);
                 minutos = calendario.get(Calendar.MINUTE);
                 segundos = calendario.get(Calendar.SECOND);
-                String hour = String.format("%02d : %02d : %02d", hora, minutos, segundos);
-                String date = String.format("%02d / %02d / %02d", dia, mes, año);
+                String hour = String.format("%02d:%02d:%02d", hora, minutos, segundos);
+                String date = String.format("%02d/%02d/%02d", dia, mes, año);
                 lblFecha.setText("<html><center>" + hour + "<br>" + date);
-                
+                if (segundos==0){
+                        for (int i = 0; i < 60; i++)
+                        {
+                            ((JTextField)pnlFondo.getComponent(i)).setBackground(Color.white);
+                        }
+                }
+                if(pnlFondo.getComponent(segundos) instanceof JTextField) {
+                    ((JTextField)pnlFondo.getComponent(segundos)).setBackground(Color.green); 
+                }
             }
         });
-        timer.start();
+        timer.start();          
+        
+    }
+    
+    private void inicial() {
+        java.util.Date actual = new java.util.Date();
+        calendario.setTime(actual);
+        dia = calendario.get(Calendar.DAY_OF_MONTH);
+        mes = (calendario.get(Calendar.MONTH) + 1);
+        año = calendario.get(Calendar.YEAR);
+        hora = calendario.get(Calendar.HOUR_OF_DAY);
+        minutos = calendario.get(Calendar.MINUTE);
+        segundos = calendario.get(Calendar.SECOND);
+        for (int i = 0; i < segundos+1; i++)
+        {
+            ((JTextField)pnlFondo.getComponent(i)).setBackground(Color.green);
+        }
+    }
+    
+    private void generar(int x, int y, JPanel panel, String pref) {
+        
+        JTextField[] campos;
+        campos = new JTextField[60];
+        for (int i = 0; i < 60; i++)
+        {
+            campos[i] = new JTextField();
+            campos[i].setFocusable(false);
+            campos[i].setSize(20, 20);
+            campos[i].setName(pref+i);
+            campos[i].setFocusable(false);
+        }
+        int espacio = 20;
+        campos[0].setLocation(x, y);
+        for (int i = 1;i < 7; i++)
+        {
+            campos[i].setLocation(x+(espacio*i), y);
+        }
+        for (int i = 1;i < 16; i++)
+        {
+            campos[i+6].setLocation(x+(espacio*7), y+(espacio*i));
+        }
+        for (int i = 1;i < 16; i++)
+        {
+            campos[i+21].setLocation((x+(espacio*7))-(espacio*i), y+(espacio*16));
+        }
+        for (int i = 1;i < 16; i++)
+        {
+            campos[i+36].setLocation((x-(espacio*9)), (y+(espacio*16)) - (espacio*i));
+        }
+        for (int i = 1;i < 9; i++)
+        {
+            campos[i+51].setLocation((x-(espacio*9)+(espacio*i)), y);
+        }
+        
+        for (int i = 0; i < 60; i++)
+        {
+            //btgRadios.add(campos[i]);
+            panel.add(campos[i], i);
+        }
+        panel.repaint();
     }
 
     /**
@@ -54,30 +133,34 @@ public class frmReloj extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        btgRadios = new javax.swing.ButtonGroup();
+        pnlFondo = new javax.swing.JPanel();
         lblFecha = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        pnlFondo.setBackground(new java.awt.Color(255, 51, 51));
 
+        lblFecha.setBackground(new java.awt.Color(255, 153, 255));
+        lblFecha.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(255, 255, 255));
         lblFecha.setText("jLabel1");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(134, 134, 134)
-                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+        javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
+        pnlFondo.setLayout(pnlFondoLayout);
+        pnlFondoLayout.setHorizontalGroup(
+            pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFondoLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(165, Short.MAX_VALUE))
+        pnlFondoLayout.setVerticalGroup(
+            pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFondoLayout.createSequentialGroup()
+                .addGap(117, 117, 117)
+                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(193, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -86,15 +169,15 @@ public class frmReloj extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,7 +219,8 @@ public class frmReloj extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.ButtonGroup btgRadios;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables
 }

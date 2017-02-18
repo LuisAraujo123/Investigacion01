@@ -41,13 +41,13 @@ public class frmSemf extends javax.swing.JFrame {
         Retro[1] = 1;
         Retro[2] = 1;
         this.setLocationRelativeTo(null);
-        Fondo img1 = new Fondo("com/sv/udb/images/fondo.jpg");
+        Fondo img1 = new Fondo("com/sv/udb/images/fondo.jpg", 250, 318);
         pnlRojo.add(img1);
         pnlRojo.repaint();
-        Fondo img2 = new Fondo("com/sv/udb/images/fondo.jpg");
+        Fondo img2 = new Fondo("com/sv/udb/images/fondo.jpg", 250, 318);
         pnlAmarillo.add(img2);
         pnlAmarillo.repaint();
-        Fondo img3 = new Fondo("com/sv/udb/images/fondo.jpg");
+        Fondo img3 = new Fondo("com/sv/udb/images/fondo.jpg", 250, 318);
         pnlVerde.add(img3);
         pnlVerde.repaint();
         this.timerR = new Timer (100, new ActionListener ()
@@ -149,7 +149,7 @@ public class frmSemf extends javax.swing.JFrame {
         pnlAmarillo = new javax.swing.JPanel();
         btnIniciar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlRojo.setBackground(new java.awt.Color(0, 0, 0));
         pnlRojo.setMaximumSize(new java.awt.Dimension(250, 350));
