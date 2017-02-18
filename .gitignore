@@ -9,3 +9,5 @@ buildNumber.properties
 .mvn/timing.properties
 /Invest01/nbproject/private/
 /nbproject/private/
+/build/
+/dist/
