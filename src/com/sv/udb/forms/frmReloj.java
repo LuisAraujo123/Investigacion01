@@ -50,7 +50,8 @@ public class frmReloj extends javax.swing.JFrame {
                 segundos = calendario.get(Calendar.SECOND);
                 String hour = String.format("%02d:%02d:%02d", hora, minutos, segundos);
                 String date = String.format("%02d/%02d/%02d", dia, mes, año);
-                lblFecha.setText("<html><center>" + hour + "<br>" + date);
+                lblHora.setText("<html><center>" + hour);
+                lblFecha.setText("<html><center>" + date);
                 if (segundos==0){
                         for (int i = 0; i < 60; i++)
                         {
@@ -135,11 +136,17 @@ public class frmReloj extends javax.swing.JFrame {
 
         btgRadios = new javax.swing.ButtonGroup();
         pnlFondo = new javax.swing.JPanel();
+        lblHora = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlFondo.setBackground(new java.awt.Color(255, 51, 51));
+
+        lblHora.setBackground(new java.awt.Color(255, 153, 255));
+        lblHora.setFont(new java.awt.Font("Consolas", 1, 48)); // NOI18N
+        lblHora.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora.setText("jLabel1");
 
         lblFecha.setBackground(new java.awt.Color(255, 153, 255));
         lblFecha.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
@@ -152,15 +159,19 @@ public class frmReloj extends javax.swing.JFrame {
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGap(105, 105, 105)
-                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         pnlFondoLayout.setVerticalGroup(
             pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGap(117, 117, 117)
-                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,6 +232,7 @@ public class frmReloj extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgRadios;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHora;
     private javax.swing.JPanel pnlFondo;
     // End of variables declaration//GEN-END:variables
 }
